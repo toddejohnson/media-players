@@ -73,33 +73,7 @@ voice_assistant:
     - delay: 1s
     - light.turn_off: led
 
-binary_sensor:
-  - platform: gpio
-    pin:
-      number: GPIO39
-      inverted: true
-    name: Button
-    id: echo_button
-    on_multi_click:
-      - timing:
-          - ON FOR AT MOST 350ms
-          - OFF FOR AT LEAST 10ms
-        then:
-          - media_player.toggle: media_out
-      - timing:
-          - ON FOR AT LEAST 350ms
-        then:
-          - if:
-              condition:
-                media_player.is_playing: media_out
-              then:
-                - media_player.stop: media_out
-          - voice_assistant.start:
-      - timing:
-          - ON FOR AT LEAST 350ms
-          - OFF FOR AT LEAST 10ms
-        then:
-          - voice_assistant.stop:
+
 
 media_player:
   - platform: i2s_audio
